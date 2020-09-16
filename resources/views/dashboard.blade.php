@@ -16,6 +16,9 @@
                             {{ __('general.crud.id') }}
                         </th>
                         <th>
+                            {{ __('general.crud.timestamp') }}
+                        </th>
+                        <th>
                             {{ __('general.crud.action') }}
                         </th>
                     </tr>
@@ -27,8 +30,11 @@
                             {{ $block['id'] }}
                         </td>
                         <td class="border px-4 py-2">
-                            <a href="{{ route('block.show', $block->id) }}" title="{{ __('block.show', ['id' => $block['id']]) }}">
-                                <i class="fa fa-eye"></i> {{ __('general.crud.show') }}
+                            {{ $block['timestamp']['human'] ?? '' }}
+                        </td>
+                        <td class="border px-4 py-2">
+                            <a href="{{ route('block.show', $block['id']) }}" title="{{ __('block.show') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="far fa-eye"></i> {{ __('general.crud.show') }}
                             </a>
                         </td>
                     </tr>

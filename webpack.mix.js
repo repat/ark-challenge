@@ -16,3 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
         require('postcss-import'),
         require('tailwindcss'),
     ]);
+mix.styles('node_modules/@fortawesome/fontawesome-free/css/all.min.css', 'public/css/fontawesome.css');
+mix.js('node_modules/@fortawesome/fontawesome-free/js/all.min.js', 'public/js/fontawesome.js');
