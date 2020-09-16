@@ -12,5 +12,6 @@ return [
         'action' => 'Action',
         'id' => 'ID',
         'show' => 'Show',
+        'timestamp' => 'Timestamp',
     ],
 ];

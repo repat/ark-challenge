@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use ArkEcosystem\Client\Connection;
+use Illuminate\Support\Facades\Log;
 
 class BlockController extends Controller
 {
@@ -27,16 +28,18 @@ class BlockController extends Controller
     /**
      * Show one specific Block
      *
-     * @param string $blockId@
+     * @param string $blockId
      * @return \Illuminate\View\View
      */
     public function show(string $blockId)
     {
         try {
-            $block = $this->connection->blocks()->show($blockId);
+            $apiResponse = $this->connection->blocks()->show($blockId);
         } catch(Exception $e) {
-            abort(418); // TODO
+            Log::error($e->getMessage());
         }
+
+        $block = $apiResponse['data'] ?? [];
 
         return view('block.show', compact('block'));
     }

@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'show' => 'Show Block :id',
+    'show' => 'Show Block',
     'header' => 'Blocks',
     'headers' => [
         'show' => 'Block :id',

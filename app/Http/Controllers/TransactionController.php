@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use ArkEcosystem\Client\Connection;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -25,18 +26,20 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show one specific Trnasaction
+     * Show one specific Transaction
      *
-     * @param string $transactionId@
+     * @param string $transactionId
      * @return \Illuminate\View\View
      */
-    public function show(string $blockId)
+    public function show(string $transactionId)
     {
         try {
-            $transaction = $this->connection->blocks()->transactions($blockId);
-        } catch(Exception $e) {
-            abort(418); // TODO
+            $apiResponse = $this->connection->transactions($transactionId);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
         }
+
+        $transaction = $apiResponse['data'] ?? [];
 
         return view('transaction.show', compact('transaction'));
     }

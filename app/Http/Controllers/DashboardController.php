@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use ArkEcosystem\Client\Connection;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -30,7 +32,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $blocks = $this->connection->blocks()->all() ?? [];
+        try {
+            $apiResponse = $this->connection->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
+        $blocks = $apiResponse['data'] ?? [];
 
         return view('dashboard', compact('blocks'));
     }
