@@ -4,12 +4,12 @@ This is an assignment as part of the interview process at [ark.io](https://ark.i
 
 ## Functionality
 
-From the [Assignment](https://www.notion.so/Laravel-Assignment-cfeb8f0570044018815806466f1fbc71)
+From the [Laravel Assignment Document](https://github.com/repat/ark-challenge/blob/master/ASSIGNMENT.md) ([Original](https://www.notion.so/Laravel-Assignment-cfeb8f0570044018815806466f1fbc71))
 
 > Regarding functionality, we expect your application to be able to perform the following tasks:
 
 * ✅ List blocks and transactions from the ARK blockchain
-* ▫️ Show detail pages for blocks and transactions
+* ✅ Show detail pages for blocks and transactions
 * ▫️ List wallets and corresponding transactions
 * ▫️ Showing delegates and who a wallet is voting for
 * ✅ Switching between ARK Mainnet and ARK Devnet
@@ -48,13 +48,14 @@ npm install
 npm run dev
 ```
 
-* Set up `.env`
+* Set up `.env`, e.g. by copying `.env.example` into `.env`
 
 ### Next steps
 
 ```sh
 php artisan migrate --seed
 php artisan storage:link
+php artisan key:generate
 ```
 
 ### Configuration
