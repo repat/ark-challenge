@@ -1,10 +1,13 @@
 {
-    "name": "laravel/laravel",
+    "name": "repat/ark_challenge",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Assignment for interview at ark.io.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "ark.io",
+        "blockchain",
+        "dlt"
     ],
     "license": "MIT",
     "require": {
@@ -21,6 +24,8 @@
         "roave/security-advisories": "dev-master"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.5",
+        "barryvdh/laravel-ide-helper": "^2.8",
         "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "^1.9.1",
         "laravel/dusk": "^6.6",
@@ -29,7 +34,8 @@
         "nunomaduro/collision": "^5.0",
         "nunomaduro/larastan": "^0.6.4",
         "php-parallel-lint/php-parallel-lint": "^1.2",
-        "phpunit/phpunit": "^9.3"
+        "phpunit/phpunit": "^9.3",
+        "stechstudio/laravel-php-cs-fixer": "^2.2"
     },
     "config": {
         "optimize-autoloader": true,
@@ -69,7 +75,8 @@
         "sca" : [
             "./vendor/bin/parallel-lint config",
             "./vendor/bin/phpstan analyse",
-            "@php artisan blade:lint"
+            "@php artisan blade:lint",
+            "@php artisan fixer:fix"
         ]
     }
 }

@@ -57,7 +57,7 @@ php artisan storage:link
 
 ### Configuration
 
-* Choose network in `app/Providers/AppServiceProvider.php`, chose from `config/ark.php`
+* Choose network in `app/Providers/AppServiceProvider.php`, choose from `config/ark.php`
 
 > ⚠️ TODO
 
@@ -70,7 +70,7 @@ php artisan storage:link
 * `phpunit`
 * `php artisan dusk`
 
-### Static Code Analysis
+### Static Code Analysis & Formatting
 
 * `composer sca`
 
@@ -80,6 +80,7 @@ php artisan storage:link
 ./vendor/bin/parallel-lint config
 ./vendor/bin/phpstan analyse
 php artisan blade:lint
+php artisan fixer:fix
 ```
 
 ### Debugging
