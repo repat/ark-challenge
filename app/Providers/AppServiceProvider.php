@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use ArkEcosystem\Client\Connection;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Connection::class, function ($app) {
+            return new Connection([
+                'host' => config('ark.host_main'),
+            ]);
+        });
     }
 
     /**
