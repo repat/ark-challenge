@@ -8,13 +8,15 @@ From the [Assignment](https://www.notion.so/Laravel-Assignment-cfeb8f05700440188
 
 > Regarding functionality, we expect your application to be able to perform the following tasks:
 
-* ▫️ List blocks and transactions from the ARK blockchain
+* ✅ List blocks and transactions from the ARK blockchain
 * ▫️ Show detail pages for blocks and transactions
 * ▫️ List wallets and corresponding transactions
 * ▫️ Showing delegates and who a wallet is voting for
-* ▫️ Switching between ARK Mainnet and ARK Devnet
+* ✅ Switching between ARK Mainnet and ARK Devnet
 * ✅ User login and saving of user-preferences
 * ▫️ Letting a user save his own wallets
+
+See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 
 ## Software Versions
 
@@ -91,6 +93,10 @@ php artisan fixer:fix
 ## Deploy
 
 > ⚠️ TODO
+
+## Design Explanations
+
+* `arkecosystem/php-client` vs. `arkecosystem/laravel`: Laravel package wouldn't install and is based on PHP Client, which was easier to debug (than yet another abstraction layer), resulting in [2 Pull Requests](https://github.com/repat/php-client).
 
 ## Contact
 

@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(Connection::class, function ($app) {
             return new Connection([
-                'host' => config('ark.host_main'),
+                'host' => config('ark.hosts.main'),
             ]);
         });
     }

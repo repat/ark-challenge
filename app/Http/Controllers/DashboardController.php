@@ -39,6 +39,13 @@ class DashboardController extends Controller
         }
         $blocks = $apiResponse['data'] ?? [];
 
-        return view('dashboard', compact('blocks'));
+        try {
+            $apiResponse = $this->connection->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
+        $transactions = $apiResponse['data'] ?? [];
+
+        return view('dashboard', compact('blocks', 'transactions'));
     }
 }

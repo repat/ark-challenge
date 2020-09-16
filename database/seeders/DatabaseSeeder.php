@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->command->info('Seeding Users');
+        $this->command->info('### Seeding Users ###');
         $this->call(UserSeeder::class);
+
+        echo "\x07"; // BEL makes my terminal blinky
     }
 }

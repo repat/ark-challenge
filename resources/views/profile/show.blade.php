@@ -11,7 +11,7 @@
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <x-jet-section-border />
-            
+
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.update-password-form')
                 </div>
@@ -36,6 +36,13 @@
             <div class="mt-10 sm:mt-0">
                 @livewire('profile.delete-user-form')
             </div>
+
+            <x-jet-section-border />
+
+            <div class="mt-10 sm:mt-0">
+                @livewire('profile.select-ark-net')
+            </div>
+
         </div>
     </div>
 </x-app-layout>
