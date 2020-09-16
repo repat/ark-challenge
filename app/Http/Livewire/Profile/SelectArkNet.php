@@ -21,7 +21,7 @@ class SelectArkNet extends Component
     /**
      * Rendering the livewire view
      *
-     * @return void
+     * @return \Illuminate\View\View
      */
     public function render()
     {
