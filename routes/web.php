@@ -13,10 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::name('welcome')->get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::name('dashboard')->middleware(['auth:sanctum', 'verified'])->get('/dashboard', 'DashboardController@index');
+
+Route::prefix('transaction')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::name('transaction.show')->get('/{transaction_id}/show', 'TransactionController@show');
+});
+
+Route::prefix('block')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::name('block.show')->get('/{transaction_id}/show', 'BlockController@show');
+});

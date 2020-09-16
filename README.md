@@ -55,6 +55,10 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
+### Configuration
+
+* Choose network in `app/Providers/AppServiceProvider.php`, chose from `config/ark.php`
+
 > ⚠️ TODO
 
 ## Upgrade
@@ -77,6 +81,15 @@ php artisan storage:link
 ./vendor/bin/phpstan analyse
 php artisan blade:lint
 ```
+
+### Debugging
+
+* `composer dump-autoload`
+* `php artisan cache:clear`
+
+## Deploy
+
+> ⚠️ TODO
 
 ## Contact
 
