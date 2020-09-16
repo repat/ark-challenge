@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use ArkEcosystem\Client\Connection;
+use Exception;
 use Illuminate\Support\Facades\Log;
 
 class BlockController extends Controller
@@ -35,7 +35,7 @@ class BlockController extends Controller
     {
         try {
             $apiResponse = $this->connection->blocks()->show($blockId);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
 
