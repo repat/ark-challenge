@@ -27,10 +27,13 @@ From the [Assignment](https://www.notion.so/Laravel-Assignment-cfeb8f05700440188
 * Laravel: 8.3
 * Laravel Livewire: 2.2
 * Alpine.js: 2.7.0
+* Larastan (PHPStan): 0.6.4
 * composer: 1.10.3
 * npm: 6.14.8
 * Tinkerwell: 2.9.0
 * HELO: 1.1.4
+* ChromeDriver: 85.0.4183.87
+* PHPUnit: 9.3.10
 * MacOS 10.14.6 (Mojave - Kernel 18.7.0)
 
 ## Install
@@ -57,6 +60,23 @@ php artisan storage:link
 ## Upgrade
 
 > ⚠️ TODO
+
+## Testing
+
+* `phpunit`
+* `php artisan dusk`
+
+### Static Code Analysis
+
+* `composer sca`
+
+#### Run manually
+
+```sh
+./vendor/bin/parallel-lint config
+./vendor/bin/phpstan analyse
+php artisan blade:lint
+```
 
 ## Contact
 
