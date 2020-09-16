@@ -34,7 +34,7 @@ class TransactionController extends Controller
     public function show(string $transactionId)
     {
         try {
-            $apiResponse = $this->connection->transactions($transactionId);
+            $apiResponse = $this->connection->transactions()->show($transactionId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
