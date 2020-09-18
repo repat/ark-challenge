@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use ArkEcosystem\Client\Connection;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

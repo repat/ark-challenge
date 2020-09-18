@@ -60,8 +60,6 @@ php artisan key:generate
 
 ### Configuration
 
-* Choose network in `app/Providers/AppServiceProvider.php`, choose from `config/ark.php`
-
 > ⚠️ TODO
 
 ## Upgrade
@@ -74,6 +72,8 @@ php artisan key:generate
 * `php artisan dusk`
 
 ### Static Code Analysis & Formatting
+
+This is checking for just basic, obvious errors.
 
 * `composer sca`
 
@@ -97,7 +97,7 @@ php artisan fixer:fix
 
 ## Design Explanations
 
-* `arkecosystem/php-client` vs. `arkecosystem/laravel`: Laravel package wouldn't install and is based on PHP Client, which was easier to debug (than yet another abstraction layer), resulting in [2 Pull Requests](https://github.com/repat/php-client).
+> ⚠️ TODO
 
 ## Contact
 
