@@ -26,8 +26,8 @@ See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 * MySQL: 8.0.21
 * Redis: 6.0.8
 * Memcached: 1.6.7
-* Laravel: 8.3
-* Laravel Livewire: 2.2
+* Laravel: 8.4
+* Laravel Livewire: 2.2.4
 * Alpine.js: 2.7.0
 * Larastan (PHPStan): 0.6.4
 * composer: 1.10.3

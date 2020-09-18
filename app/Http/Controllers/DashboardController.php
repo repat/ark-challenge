@@ -2,29 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use ArkEcosystem\Client\Connection;
+use ArkEcosystem\Ark\Facades\Ark;
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
-    /**
-     * Connection to the ARK API
-     *
-     * @var \ArkEcosystem\Client\Connection
-     */
-    protected $connection;
-
-    /**
-     * Constructor for DashboardController
-     *
-     * @param \ArkEcosystem\Client\Connection $connection
-     */
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
-    }
-
     /**
      * Dashboard: Overview of Transactions and Blocks
      *
@@ -32,19 +16,23 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        try {
-            $apiResponse = $this->connection->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-        $blocks = $apiResponse['data'] ?? [];
+        $blocks = Cache::remember('blocks', config('ark.blockchain_update_seconds'), function () {
+            try {
+                $apiResponse = Ark::connection(auth()->user()->net)->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
+            } catch (Exception $e) {
+                Log::error($e->getMessage());
+            }
+            return $apiResponse['data'] ?? [];
+        });
 
-        try {
-            $apiResponse = $this->connection->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-        $transactions = $apiResponse['data'] ?? [];
+        $transactions = Cache::remember('transactions', config('ark.blockchain_update_seconds'), function () {
+            try {
+                $apiResponse = Ark::connection(auth()->user()->net)->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
+            } catch (Exception $e) {
+                Log::error($e->getMessage());
+            }
+            return $apiResponse['data'] ?? [];
+        });
 
         return view('dashboard', compact('blocks', 'transactions'));
     }

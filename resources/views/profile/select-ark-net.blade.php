@@ -11,7 +11,7 @@
         <div class="col-span-12 sm:col-span-12">
             <x-jet-label for="net" value="{{ __('ark.net') }}" />
             <select wire:model="net" id="select-net">
-                @foreach(config('ark.nets') as $availableNet)
+                @foreach(array_keys(config('ark.connections')) as $availableNet)
                     <option value="{{ $availableNet }}">{{ __('ark.nets.' . $availableNet) }}</option>
                 @endforeach
             </select>
