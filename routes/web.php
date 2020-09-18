@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::name('welcome')->get('/', function () {
-    return view('welcome');
+    return view('welcome'); // TODO
 });
 
 Route::name('dashboard')->middleware(['auth:sanctum', 'verified'])->get('/dashboard', 'DashboardController@index');
@@ -24,9 +24,10 @@ Route::prefix('transaction')->middleware(['auth:sanctum', 'verified'])->group(fu
 });
 
 Route::prefix('block')->middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::name('block.show')->get('/{transaction_id}/show', 'BlockController@show');
+    Route::name('block.show')->get('/{block_id}/show', 'BlockController@show');
 });
 
 Route::prefix('wallet')->middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::name('wallet')->get('/wallet', 'WalletController@index');
+    Route::name('wallet')->get('/', 'WalletController@index');
+    Route::name('wallet.show')->get('/{wallet_address}/show', 'WalletController@show');
 });

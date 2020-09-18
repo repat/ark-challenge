@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use ArkEcosystem\Ark\Facades\Ark;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
