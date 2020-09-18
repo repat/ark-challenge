@@ -26,3 +26,7 @@ Route::prefix('transaction')->middleware(['auth:sanctum', 'verified'])->group(fu
 Route::prefix('block')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::name('block.show')->get('/{transaction_id}/show', 'BlockController@show');
 });
+
+Route::prefix('wallet')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::name('wallet')->get('/wallet', 'WalletController@index');
+});
