@@ -21,6 +21,7 @@
         "alpinejs": "^2.7.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.14.0"
+        "@fortawesome/fontawesome-free": "^5.14.0",
+        "@github/include-fragment-element": "^5.2.0"
     }
 }

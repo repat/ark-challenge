@@ -10,4 +10,8 @@
       @apply text-xl;
       @apply text-center;
     }
+    h3 {
+      @apply text-l;
+      @apply text-center;
+    }
   }

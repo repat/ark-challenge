@@ -29463,7 +29463,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/postcss-loader/src/index.js):\nSyntaxError\n\n(14:7) `@apply` cannot be used with `.text-l` because `.text-l` either cannot be found, or its actual definition includes a pseudo-selector like :hover, :active, etc. If you're sure that `.text-l` exists, make sure that any `@import` statements are being properly processed *before* Tailwind CSS sees your CSS, as `@apply` can only be used for classes in the same CSS tree.\n\n \u001b[90m 12 | \u001b[39m    \u001b[33m}\u001b[39m\n \u001b[90m 13 | \u001b[39m    h3 \u001b[33m{\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 14 | \u001b[39m      \u001b[36m@apply\u001b[39m text-l\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 15 | \u001b[39m      \u001b[36m@apply\u001b[39m text-center\u001b[33m;\u001b[39m\n \u001b[90m 16 | \u001b[39m    \u001b[33m}\u001b[39m\n\n    at /Users/rene/Documents/GitHub/ark-challenge/node_modules/webpack/lib/NormalModule.js:316:20\n    at /Users/rene/Documents/GitHub/ark-challenge/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /Users/rene/Documents/GitHub/ark-challenge/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/Users/rene/Documents/GitHub/ark-challenge/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at /Users/rene/Documents/GitHub/ark-challenge/node_modules/postcss-loader/src/index.js:207:9");
 
 /***/ }),
 
