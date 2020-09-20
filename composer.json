@@ -59,7 +59,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "app/Helpers/defines.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

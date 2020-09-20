@@ -26,7 +26,7 @@
                 {{ $wallet['address'] }}
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ $wallet['balance'] }} &#1127;
+                {{ $wallet['balance'] }} {!! ARK_CURRENCY !!}
             </td>
             <td class="border px-4 py-2">
                 <x-button href="{{ route('wallet.show', $wallet['address']) }}" title="{{ __('wallet.show') }}" type="show" />

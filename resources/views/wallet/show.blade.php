@@ -8,7 +8,7 @@
     <x-panel>
         <div class="flex flex-col">
 
-            <h2 class="text-center">{{ __('general.crud.details') }}<h3>
+            <h2 class="text-center">{{ __('general.crud.details') }}</h2>
 
             @foreach($wallet as $key => $values)
                 @if(!is_array($values))
