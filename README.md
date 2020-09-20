@@ -71,7 +71,7 @@ php artisan key:generate
 * `phpunit`
 * `php artisan dusk`
 
-### Static Code Analysis & Formatting
+### Static Code Analysis, Formatting & IDE
 
 This is checking for just basic, obvious errors.
 
@@ -90,6 +90,10 @@ php artisan fixer:fix
 
 * `composer dump-autoload`
 * `php artisan cache:clear`
+
+### IDE Helpers
+
+* `composer generate-ide-helper`
 
 ## Deploy
 
