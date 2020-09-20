@@ -5,82 +5,28 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <h2>{{ __('block.header') }}</h2>
-                <table class="table-auto">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">
-                                {{ __('general.crud.id') }}
-                            </th>
-                            <th>
-                                {{ __('general.crud.timestamp') }}
-                            </th>
-                            <th>
-                                {{ __('general.crud.action') }}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($blocks as $block)
-                        <tr>
-                            <td class="border px-4 py-2">
-                                {{ $block['id'] }}
-                            </td>
-                            <td class="border px-4 py-2">
-                                {{ $block['timestamp']['human'] ?? '' }}
-                            </td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('block.show', $block['id']) }}" title="{{ __('block.show') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                    <i class="far fa-eye"></i> {{ __('general.crud.show') }}
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <h2>{{ __('transaction.header') }}</h2>
-                <table class="table-auto">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">
-                                {{ __('general.crud.id') }}
-                            </th>
-                            <th>
-                                {{ __('general.crud.timestamp') }}
-                            </th>
-                            <th>
-                                {{ __('general.crud.action') }}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($transactions as $transaction)
-                        <tr>
-                            <td class="border px-4 py-2">
-                                {{ $transaction['id'] }}
-                            </td>
-                            <td class="border px-4 py-2">
-                                {{ $transaction['timestamp']['human'] ?? '' }}
-                            </td>
-                            <td class="border px-4 py-2">
-                                <a href="{{ route('transaction.show', $transaction['id']) }}" title="{{ __('transaction.show') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                    <i class="far fa-eye"></i> {{ __('general.crud.show') }}
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <x-panel>
+        <x-slot name="header">
+            <h2>{{ __('block.header') }}</h2>
+        </x-slot>
+        <include-fragment src='/block/_partial'>
+            @include('_partials.placeholder-3-col')
+        </include-fragment>
+    </x-panel>
+
+    <x-panel>
+        <x-slot name="header">
+            <h2>{{ __('transaction.header') }}</h2>
+        </x-slot>
+        <include-fragment src='/transaction/_partial'>
+            @include('_partials.placeholder-3-col')
+        </include-fragment>
+    </x-panel>
+
+    <x-slot name="scripts">
+        {{-- <script type="module" src="{{ mix('js/include-fragment.js') }}"></script> --}}
+        <script type="module" src="https://unpkg.com/@github/include-fragment-element@latest?module"></script>
+        {{-- <script src="{{ mix('js/echo.js') }}"></script> --}}
+    </x-slot>
 </x-app-layout>
+

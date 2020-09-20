@@ -5,70 +5,36 @@
         </h2>
     </x-slot>
 
-    <div class="flex flex-col">
-        @foreach($wallet as $key => $values)
-        <div class="flex mb4">
-            <div class="w-1/4 bg-gray-400 h-12">
-                {{ $key }}
-            </div>
-            <div class="w-3/4 bg-gray-500 h-12">
-                @if(! is_array($values))
-                {{ $values }}
-                {{-- @else
-                    <ul>
-                    @foreach($values as $valueKey => $value)
-                        @if(is_string($value))
-                        <li>
-                            {{ $valueKey }} : {{ $value }}
-                        </li>
-                        @endif
-                    @endforeach
-                    </ul> --}}
-                @endif
-            </div>
-        </div>
-        @endforeach
+    <x-panel>
+        <div class="flex flex-col">
 
-        @if(!empty($transactions))
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <h2 class="text-center">{{ __('general.crud.details') }}<h3>
+
+            @foreach($wallet as $key => $values)
+                @if(!is_array($values))
+                    <div class="flex mb4">
+                        <div class="w-1/4 bg-gray-100 h-12 p-10">
+                            {{ __('wallet.fields.' . $key) }}
+                        </div>
+                        <div class="w-3/4 bg-gray-200 h-12 p-10">
+                                {{ $values ?: __('general.crud.no') }}
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+
+            <x-panel>
+                <x-slot name="header">
                     <h2>{{ __('transaction.header') }}</h2>
-                    <table class="table-auto">
-                        <thead>
-                            <tr>
-                                <th class="px-4 py-2">
-                                    {{ __('general.crud.id') }}
-                                </th>
-                                <th>
-                                    {{ __('general.crud.timestamp') }}
-                                </th>
-                                <th>
-                                    {{ __('general.crud.action') }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($transactions as $transaction)
-                            <tr>
-                                <td class="border px-4 py-2">
-                                    {{ $transaction['id'] }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    {{ $transaction['timestamp']['human'] ?? '' }}
-                                </td>
-                                <td class="border px-4 py-2">
-                                    <a href="{{ route('transaction.show', $transaction['id']) }}" title="{{ __('transaction.show') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <i class="far fa-eye"></i> {{ __('general.crud.show') }}
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        @endif
-    </div> {{-- .flex .flex-col --}}
+                </x-slot>
+                <include-fragment src='/wallet/_partial/{{ $wallet['address'] }}'>
+                    @include('_partials.placeholder-3-col')
+                </include-fragment>
+            </x-panel>
+
+        </div> {{-- .flex .flex-col --}}
+    </x-panel>
+    <x-slot name="scripts">
+        <script type="module" src="https://unpkg.com/@github/include-fragment-element@latest?module"></script>
+    </x-slot>
 </x-app-layout>

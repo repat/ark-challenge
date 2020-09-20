@@ -15,15 +15,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net)->wallets()->all();
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $wallets = $apiResponse['data'] ?? [];
-
-        return view('wallet.index', compact('wallets'));
+        return view('wallet.index');
     }
 
     /**
@@ -41,8 +33,36 @@ class WalletController extends Controller
         }
 
         // Filter out transactions as they are fetched below
-        $wallet = array_filter($apiResponse['data'] ?? [], fn($key) => $key !== 'transactions');
+        $wallet = array_filter($apiResponse['data'] ?? [], fn ($key) => $key !== 'transactions');
 
+        return view('wallet.show', compact('wallet'));
+    }
+
+    /**
+     * Rendered partial for all wallets
+     *
+     * @return string
+     */
+    public function _partial()
+    {
+        try {
+            $apiResponse = Ark::connection(auth()->user()->net)->wallets()->all();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
+
+        $wallets = $apiResponse['data'] ?? [];
+
+        return view('_partials.wallets', compact('wallets'))->render();
+    }
+
+    /**
+     * Rendered transaction partial for one specific Wallet
+     *
+     * @return string
+     */
+    public function _partialAddress(string $walletAddress)
+    {
         try {
             $apiResponse = Ark::connection(auth()->user()->net)->wallets()->transactions($walletAddress);
         } catch (Exception $e) {
@@ -51,6 +71,6 @@ class WalletController extends Controller
 
         $transactions = $apiResponse['data'] ?? [];
 
-        return view('wallet.show', compact('wallet', 'transactions'));
+        return view('_partials.transactions', compact('transactions'))->render();
     }
 }

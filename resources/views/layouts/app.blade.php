@@ -12,7 +12,6 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ mix('css/fontawesome.css') }}">
 
         @livewireStyles
 
@@ -39,6 +38,8 @@
 
         @stack('modals')
 
-        @livewireScripts
+        @if(isset($scripts))
+            {{ $scripts }}
+        @endif
     </body>
 </html>
