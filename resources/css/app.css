@@ -11,7 +11,7 @@
       @apply text-center;
     }
     h3 {
-      @apply text-l;
+      @apply text-lg;
       @apply text-center;
     }
   }
