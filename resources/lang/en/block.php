@@ -12,5 +12,14 @@ return [
     'header' => 'Blocks',
     'headers' => [
         'show' => 'Block :id',
-    ]
+    ],
+    'fields' => [
+        'id' => 'ID',
+        'version' => 'Version',
+        'height' => 'Height',
+        'previous' => 'Previous',
+        'signature' => 'Signature',
+        'confirmations' => 'Confirmations',
+        'transactions' => 'Transactions',
+    ],
 ];

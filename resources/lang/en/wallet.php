@@ -21,6 +21,8 @@ return [
         'isResigned' => 'Is Resigned?',
         'nonce' => 'Nonce',
         'publicKey' => 'Public Key',
-        'secondPublicKey' => 'Second Public Key'
+        'secondPublicKey' => 'Second Public Key',
+        'username' => 'Username',
+        'vote' => 'Vote',
     ]
 ];
