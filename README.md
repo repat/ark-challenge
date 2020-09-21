@@ -10,7 +10,7 @@ From the [Laravel Assignment Document](https://github.com/repat/ark-challenge/bl
 
 * ✅ List blocks and transactions from the ARK blockchain
 * ✅ Show detail pages for blocks and transactions
-* ▫️ List wallets and corresponding transactions
+* ✅ List wallets and corresponding transactions
 * ▫️ Showing delegates and who a wallet is voting for
 * ✅ Switching between ARK Mainnet and ARK Devnet
 * ✅ User login and saving of user-preferences
@@ -26,7 +26,7 @@ See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 * MySQL: 8.0.21
 * Redis: 6.0.8
 * Memcached: 1.6.7
-* Laravel: 8.4
+* Laravel: 8.5
 * Laravel Livewire: 2.2.4
 * Alpine.js: 2.7.0
 * Larastan (PHPStan): 0.6.4
