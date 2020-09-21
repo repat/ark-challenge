@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <i class="fas fa-qrcode" onclick="toggleModal()"></i>
             {{ __('wallet.headers.show', ['address' => $wallet['address']]) }}
         </h2>
     </x-slot>
@@ -8,20 +9,7 @@
     <x-panel>
         <div class="flex flex-col">
 
-            <h2 class="text-center">{{ __('general.crud.details') }}</h2>
-
-            @foreach($wallet as $key => $values)
-                @if(!is_array($values))
-                    <div class="flex mb4">
-                        <div class="w-1/4 bg-gray-100 h-12 p-10">
-                            {{ __('wallet.fields.' . $key) }}
-                        </div>
-                        <div class="w-3/4 bg-gray-200 h-12 p-10">
-                                {{ $values ?: __('general.crud.no') }}
-                        </div>
-                    </div>
-                @endif
-            @endforeach
+            @include('_partials.record', ['record' => $wallet, 'transKey' => 'wallet'])
 
             <x-panel>
                 <x-slot name="header">
@@ -34,7 +22,26 @@
 
         </div> {{-- .flex .flex-col --}}
     </x-panel>
+
+    @prepend('modals')
+    <x-modal>
+        <x-slot name="title">
+            {{ $wallet['address'] }}
+        </x-slot>
+        <x-slot name="body">
+            {!! QrCode::size(100)->generate('ark:' . $wallet['address']) !!}
+        </x-slot>
+    </x-modal>
+    @endprepend
+
     <x-slot name="scripts">
-        <script type="module" src="https://unpkg.com/@github/include-fragment-element@latest?module"></script>
+        <script>
+        function toggleModal(){
+            const modal = document.querySelector('.modal');
+            modal.classList.toggle('opacity-0');
+            modal.classList.toggle('pointer-events-none')
+        }
+        </script>
     </x-slot>
+
 </x-app-layout>

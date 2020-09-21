@@ -35,12 +35,6 @@
                     @endif
                 </div>
             @endif
-
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="mt-8 bg-white dark:bg-gray-400 overflow-hidden shadow sm:rounded-lg">
-                    <h1>Ark Interview Assignment</h1>
-                </div>
-            </div>
         </div>
     </body>
 </html>

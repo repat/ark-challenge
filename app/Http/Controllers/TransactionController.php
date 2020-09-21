@@ -18,7 +18,7 @@ class TransactionController extends Controller
     public function show(string $transactionId)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net)->transactions()->show($transactionId);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->show($transactionId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -37,7 +37,7 @@ class TransactionController extends Controller
     {
         $transactions = Cache::remember('transactions', config('ark.blockchain_update_seconds'), function () {
             try {
-                $apiResponse = Ark::connection(auth()->user()->net)->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
+                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
             } catch (Exception $e) {
                 Log::error($e->getMessage());
             }

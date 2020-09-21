@@ -9,9 +9,6 @@
         <th>
             {{ __('general.crud.balance') }}
         </th>
-        <th>
-            {{ __('general.crud.action') }}
-        </th>
     </thead>
     <tbody>
     @if(! empty($wallets))
@@ -23,13 +20,12 @@
                 @endif
             </td>
             <td class="border px-4 py-2">
-                {{ $wallet['address'] }}
+                <a href="{{ route('wallet.show', $wallet['address']) }}" title="{{ __('wallet.show', ['address' => $wallet['address']]) }}">
+                    <i class="fas fa-wallet"></i> {{ str_limit($wallet['address'], config('ark.long_id_length')) }}
+                </a>
             </td>
             <td class="border px-4 py-2 text-right">
                 {{ $wallet['balance'] }} {!! ARK_CURRENCY !!}
-            </td>
-            <td class="border px-4 py-2">
-                <x-button href="{{ route('wallet.show', $wallet['address']) }}" title="{{ __('wallet.show') }}" type="show" />
             </td>
         </tr>
         @endforeach

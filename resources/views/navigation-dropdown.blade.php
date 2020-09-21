@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('wallet') }}" :active="request()->routeIs('wallet')">
                         {{ __('general.navigation.wallet') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('delegate') }}" :active="request()->routeIs('delegate')">
+                        {{ __('general.navigation.delegate') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

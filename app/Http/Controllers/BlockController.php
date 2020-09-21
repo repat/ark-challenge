@@ -18,7 +18,7 @@ class BlockController extends Controller
     public function show(string $blockId)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net)->blocks()->show($blockId);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->blocks()->show($blockId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -37,7 +37,7 @@ class BlockController extends Controller
     {
         $blocks = Cache::remember('blocks', config('ark.blockchain_update_seconds'), function () {
             try {
-                $apiResponse = Ark::connection(auth()->user()->net)->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
+                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
             } catch (Exception $e) {
                 Log::error($e->getMessage());
             }

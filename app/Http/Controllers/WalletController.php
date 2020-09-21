@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class WalletController extends Controller
 {
     /**
-     * Show a list of all wallet
+     * Show a list of all Wallet
      *
      * @return \Illuminate\View\View
      */
@@ -27,7 +27,7 @@ class WalletController extends Controller
     public function show(string $walletAddress)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net)->wallets()->show($walletAddress);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->show($walletAddress);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -39,14 +39,14 @@ class WalletController extends Controller
     }
 
     /**
-     * Rendered partial for all wallets
+     * Rendered partial for all Wallets
      *
      * @return string
      */
     public function _partial()
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net)->wallets()->all();
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->all();
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -64,7 +64,7 @@ class WalletController extends Controller
     public function _partialAddress(string $walletAddress)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net)->wallets()->transactions($walletAddress);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->transactions($walletAddress);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }

@@ -17,11 +17,30 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.js" defer></script>
+        {{-- <script type="module" src="{{ mix('js/include-fragment.js') }}"></script> --}}
+        <script type="module" src="https://unpkg.com/@github/include-fragment-element@latest?module" defer></script>
         <script src="{{ mix('js/fontawesome.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased flex flex-col min-h-screen">
+        @if(!auth()->check())
+            @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif
+                    @endif
+                </div>
+            @endif
+        @endif
+        <div class="min-h-screen bg-gray-100 flex-grow">
+            @auth
             @livewire('navigation-dropdown')
+            @endif
 
             <!-- Page Heading -->
             <header class="bg-white shadow">
@@ -37,6 +56,10 @@
         </div>
 
         @stack('modals')
+
+        <footer>
+            <x-footer />
+        </footer>
 
         @if(isset($scripts))
             {{ $scripts }}

@@ -23,10 +23,8 @@
         </include-fragment>
     </x-panel>
 
-    <x-slot name="scripts">
-        {{-- <script type="module" src="{{ mix('js/include-fragment.js') }}"></script> --}}
-        <script type="module" src="https://unpkg.com/@github/include-fragment-element@latest?module"></script>
+    {{-- <x-slot name="scripts"> --}}
         {{-- <script src="{{ mix('js/echo.js') }}"></script> --}}
-    </x-slot>
+    {{-- </x-slot> --}}
 </x-app-layout>
 
