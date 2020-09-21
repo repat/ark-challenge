@@ -14,4 +14,7 @@
       @apply text-lg;
       @apply text-center;
     }
+    a {
+      @apply text-gray-600
+    }
   }
