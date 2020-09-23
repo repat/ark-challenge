@@ -9,7 +9,7 @@
         <x-slot name="header">
             <h2>{{ __('block.header') }}</h2>
         </x-slot>
-        <include-fragment src='/block/_partial'>
+        <include-fragment src='{{ route('block._partial', $noParameters = [], $relativeRoute = true) }}'>
             @include('_partials.placeholder-3-col')
         </include-fragment>
     </x-panel>
@@ -18,7 +18,7 @@
         <x-slot name="header">
             <h2>{{ __('transaction.header') }}</h2>
         </x-slot>
-        <include-fragment src='/transaction/_partial'>
+        <include-fragment src='{{ route('transaction._partial', $noParameters = [], $relativeRoute = true) }}'>
             @include('_partials.placeholder-3-col')
         </include-fragment>
     </x-panel>

@@ -12,6 +12,8 @@ return [
     'header' => 'Delegates',
     'headers' => [
         'show' => 'Delegate :address',
+        'transactions' => 'Transactions',
+        'votes' => 'Votes',
     ],
     'fields' => [
         'address' => 'Address',

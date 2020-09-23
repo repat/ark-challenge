@@ -1,4 +1,4 @@
-<table class="table-auto w-full">
+<table class="table-auto w-full" id="blocks-table">
     <thead>
         <tr>
             <th class="px-4 py-2">

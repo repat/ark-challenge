@@ -15,7 +15,7 @@
                 <x-slot name="header">
                     <h2>{{ __('transaction.header') }}</h2>
                 </x-slot>
-                <include-fragment src='/wallet/_partial/{{ $wallet['address'] }}'>
+                <include-fragment src='{{ route('wallet._partial.transactions', $wallet['address'], $relativeRoute = true) }}'>
                     @include('_partials.placeholder-3-col')
                 </include-fragment>
             </x-panel>

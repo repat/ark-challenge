@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-    <x-search />
-
     <x-panel>
         <include-fragment src='/delegate/_partial'>
             @include('_partials.placeholder-3-col')

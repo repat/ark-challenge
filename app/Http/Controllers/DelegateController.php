@@ -61,10 +61,10 @@ class DelegateController extends Controller
      *
      * @return string
      */
-    public function _partialAddress(string $delegateAddress)
+    public function _partialTransactions(string $delegateAddress)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->delegates()->transactions($delegateAddress);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallet()->transactions($delegateAddress);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -72,5 +72,24 @@ class DelegateController extends Controller
         $transactions = $apiResponse['data'] ?? [];
 
         return view('_partials.transactions', compact('transactions'))->render();
+    }
+
+    /**
+     * Rendered votes partial for one specific Delegate
+     *
+     * @return string
+     */
+    public function _partialVotes(string $delegateAddress)
+    {
+        try {
+            // A vote is a special transaction, a delegate is a special wallet
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallet($delegateAddress);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
+
+        $votes = $apiResponse['data'] ?? [];
+
+        return view('_partials.votes', compact('votes'))->render();
     }
 }

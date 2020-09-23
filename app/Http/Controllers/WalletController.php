@@ -61,7 +61,7 @@ class WalletController extends Controller
      *
      * @return string
      */
-    public function _partialAddress(string $walletAddress)
+    public function _partialTransactions(string $walletAddress)
     {
         try {
             $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->transactions($walletAddress);

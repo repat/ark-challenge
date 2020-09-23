@@ -1,4 +1,5 @@
-<table class="table-auto w-full">
+@if(! empty($transactions))
+<table class="table-auto w-full" id="transactions-table">
     <thead>
         <tr>
             <th class="px-4 py-2">
@@ -24,15 +25,18 @@
                 </a>
             </td>
             <td class="border px-4 py-2">
-                {{ carbon($transaction['timestamp']['human'])->format(config('app.format_dates')) }}
-            </td>
-            <td class="border px-4 py-2">
                 {{ $transaction['fee'] }} {!! ARK_CURRENCY !!}
             </td>
             <td class="border px-4 py-2">
                 {{ $transaction['amount'] }} {!! ARK_CURRENCY !!}
             </td>
+            <td class="border px-4 py-2">
+                {{ carbon($transaction['timestamp']['human'])->format(config('app.format_dates')) }}
+            </td>
         </tr>
     @endforeach
     </tbody>
 </table>
+@else
+{{ __('general.crud.no_records_found') }}
+@endif

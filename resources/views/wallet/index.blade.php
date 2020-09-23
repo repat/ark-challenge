@@ -5,10 +5,8 @@
         </h2>
     </x-slot>
 
-    <x-search />
-
     <x-panel>
-        <include-fragment src='/wallet/_partial'>
+        <include-fragment src='{{ route('wallet._partial', $noParameters = [], $relativeRoute = true) }}'>
             @include('_partials.placeholder-3-col')
         </include-fragment>
     </x-panel>
