@@ -1,4 +1,4 @@
-<table class="table-auto w-full">
+<table class="table-auto w-full" id='delegates-table'>
     <thead>
         <th class="px-4 py-2">
             {{ __('general.crud.rank') }}

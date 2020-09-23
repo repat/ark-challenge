@@ -13,17 +13,17 @@ class DashboardTest extends DuskTestCase
      *
      * @return void
      */
-    public function testDashboardViewsAndLoginLinks()
+    public function testDashboardLoggedOutViewsAndLoginLinks()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->visit(route('welcome', $noParameters = [], $relativeRoute = true))
                     ->assertSee('Dashboard')
                     ->assertSee('Login')
                     ->assertSee('Register')
                     ->waitFor('#blocks-table')
-                    ->assertSee('Generator')
+                    ->assertSee('Generator') // example from blocks table
                     ->waitFor('#transactions-table')
-                    ->assertSee('Transactions');
+                    ->assertSee('Amount'); // examples from transactions table
         });
     }
 }
