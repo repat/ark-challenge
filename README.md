@@ -21,16 +21,16 @@ See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 ## Software Versions
 
 * PHP: 7.4.10
-* node: 14.11.0
+* node: 14.12.0
 * nginx: 1.19.2
 * MySQL: 8.0.21
 * Redis: 6.0.8
 * Memcached: 1.6.7
-* Laravel: 8.5
-* Laravel Livewire: 2.2.4
+* Laravel: 8.6
+* Laravel Livewire: 2.2.6
 * Alpine.js: 2.7.0
-* Larastan (PHPStan): 0.6.4
-* composer: 1.10.3
+* PHPStan: 0.12.43 ([Larastan Wrapper](https://github.com/nunomaduro/larastan))
+* composer: 1.10.13
 * npm: 6.14.8
 * Tinkerwell: 2.9.0
 * HELO: 1.1.4
@@ -40,6 +40,15 @@ See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 
 ## Install
 
+### Git
+
+```sh
+git clone https://github.com/repat/ark-challenge.git
+cd ark-challenge
+```
+
+* Set up `.env`, e.g. by copying `.env.example` into `.env` and filling in your local details
+
 ### Install dependencies
 
 ```sh
@@ -47,8 +56,6 @@ composer install
 npm install
 npm run dev
 ```
-
-* Set up `.env`, e.g. by copying `.env.example` into `.env`
 
 ### Next steps
 
@@ -60,13 +67,21 @@ php artisan key:generate
 
 ### Configuration
 
-> ⚠️ TODO
+You can login using the following credentials:
+
+* Username: `ark@rpschultz.de`
+* Password: `password`
 
 ## Upgrade
 
-> ⚠️ TODO
+```sh
+composer update
+npm update
+```
 
 ## Testing
+
+You might have to update the ChromeDriver version like so: `php artisan dusk:chrome-driver`.
 
 * `phpunit`
 * `php artisan dusk`
