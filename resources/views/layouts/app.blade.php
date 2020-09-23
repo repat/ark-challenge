@@ -64,5 +64,7 @@
         @if(isset($scripts))
             {{ $scripts }}
         @endif
+
+         @livewireScripts
     </body>
 </html>
