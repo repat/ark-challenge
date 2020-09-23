@@ -4,7 +4,7 @@ This is an assignment as part of the interview process at [ark.io](https://ark.i
 
 ## Functionality
 
-From the [Laravel Assignment Document](https://github.com/repat/ark-challenge/blob/master/ASSIGNMENT.md) ([Original](https://www.notion.so/Laravel-Assignment-cfeb8f0570044018815806466f1fbc71))
+From the [Laravel Assignment Document](https://github.com/repat/ark-challenge/blob/master/ASSIGNMENT.md).
 
 > Regarding functionality, we expect your application to be able to perform the following tasks:
 
