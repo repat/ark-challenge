@@ -3,6 +3,8 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <i class="fas fa-qrcode" onclick="toggleModal()"></i>
             {{ __('wallet.headers.show', ['address' => $wallet['address']]) }}
+
+            @livewire('user-favorite', ['address' => $wallet['address']])
         </h2>
     </x-slot>
 

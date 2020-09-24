@@ -18,15 +18,11 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are guarded for mass assignment
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -57,4 +53,25 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * A User can have many favorites
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favorites()
+    {
+        return $this->hasMany(UserFavorite::class, 'user_id');
+    }
+
+    /**
+     * Syntactic sugar for eloquent relationship
+     *
+     * @param string $address
+     * @return boolean
+     */
+    public function hasFavorite(string $address) : bool
+    {
+        return $this->favorites->contains('address', $address);
+    }
 }

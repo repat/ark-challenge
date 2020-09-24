@@ -9,6 +9,7 @@ return [
     */
 
     'show' => 'Show Wallet',
+    'favorite' => 'Favorite this wallet',
     'header' => 'Wallets',
     'headers' => [
         'show' => 'Wallet :address',
