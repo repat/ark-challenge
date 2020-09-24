@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class WalletController extends Controller
 {
     /**
-     * Show a list of all Wallet
+     * Show a list of all Wallets
      *
      * @return \Illuminate\View\View
      */

@@ -22,7 +22,7 @@
                                 <i class="fas fa-cubes"></i> {{ $values }}
                             </a>
                         @else
-                            @if($values === "0" || !empty($values))
+                            @if($values === "0" || ! empty($values))
                                 {{ $values }}
                             @else
                                 {{ __('general.crud.no') }}

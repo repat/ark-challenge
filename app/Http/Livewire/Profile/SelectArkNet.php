@@ -6,10 +6,10 @@ use Livewire\Component;
 
 class SelectArkNet extends Component
 {
-    public $net;
+    public string $net;
 
     /**
-     * Init
+     * Initialize Net with users current net
      *
      * @return void
      */
