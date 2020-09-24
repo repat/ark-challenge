@@ -12,5 +12,7 @@
         </div>
     </div>
 @else
-    {{ __('wallet.no_vote') }}
+    <x-warning-box>
+        ⚠️ {{ __('wallet.no_vote') }}
+    </x-warning-box>
 @endif

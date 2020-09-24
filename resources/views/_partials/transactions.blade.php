@@ -24,10 +24,10 @@
                     <i class="fas fa-file-invoice-dollar"></i> {{ str_limit($transaction['id'], config('ark.long_id_length')) }}
                 </a>
             </td>
-            <td class="border px-4 py-2">
+            <td class="border px-4 py-2 text-right">
                 {{ $transaction['fee'] }} {!! ARK_CURRENCY !!}
             </td>
-            <td class="border px-4 py-2">
+            <td class="border px-4 py-2 text-right">
                 {{ $transaction['amount'] }} {!! ARK_CURRENCY !!}
             </td>
             <td class="border px-4 py-2">
