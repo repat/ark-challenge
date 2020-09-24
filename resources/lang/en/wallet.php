@@ -27,4 +27,5 @@ return [
         'vote' => 'Vote',
     ],
     'no_vote' => 'This wallet does not vote for anybody.',
+    'no_favorites_yet' => 'You have no favorite wallets yet.',
 ];

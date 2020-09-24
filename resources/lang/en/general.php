@@ -10,6 +10,7 @@ return [
 
     'crud' => [
         'action' => 'Action',
+        'added' => 'Added',
         'address' => 'Address',
         'amount' => 'Amount',
         'balance' => 'Balance',

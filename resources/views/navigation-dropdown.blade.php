@@ -43,6 +43,10 @@
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
 
+                        <x-jet-dropdown-link href="{{ route('user_favorite.index') }}">
+                            {{ __('Favorite Wallets') }}
+                        </x-jet-dropdown-link>
+
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="/user/api-tokens">
                                 {{ __('API Tokens') }}

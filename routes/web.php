@@ -40,3 +40,7 @@ Route::prefix('delegate')->group(function () {
     Route::name('delegate._partial')->get('/_partial', 'DelegateController@_partial');
     Route::name('delegate._partial.vote')->get('/_partial/{delegate_address}/vote', 'DelegateController@_partialVote');
 });
+
+Route::prefix('favorite')->group(function () {
+    Route::name('user_favorite.index')->get('/', 'UserFavoriteController@index');
+});
