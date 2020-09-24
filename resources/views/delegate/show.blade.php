@@ -15,7 +15,7 @@
         </x-slot>
 
         <include-fragment src='{{ route('delegate._partial.transactions', $delegate['address'], $relativeRoute = true) }}'>
-            @include('_partials.placeholder-3-col')
+            @include('_partials.placeholder-n-col', ['amountCol' => 4])
         </include-fragment>
     </x-panel>
 
@@ -26,7 +26,7 @@
             </h2>
         </x-slot>
         <include-fragment src='{{ route('delegate._partial.votes', $delegate['address'], $relativeRoute = true) }}'>
-            @include('_partials.placeholder-3-col')
+            @include('_partials.placeholder-n-col', ['amountCol' => 4])
         </include-fragment>
     </x-panel>
 

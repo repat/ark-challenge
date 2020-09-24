@@ -7,7 +7,7 @@
 
     <x-panel>
         <include-fragment src='/delegate/_partial'>
-            @include('_partials.placeholder-3-col')
+            @include('_partials.placeholder-n-col', ['amountCol' => 4])
         </include-fragment>
     </x-panel>
 </x-app-layout>

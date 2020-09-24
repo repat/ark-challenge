@@ -59,6 +59,7 @@ return [
     'limits' => [
         'blocks' => 10,
         'transactions' => 10,
+        'default' => 10,
     ],
 
     'blockchain_update_seconds' => 8,

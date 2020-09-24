@@ -7,7 +7,7 @@
 
     <x-panel>
         <include-fragment src='{{ route('wallet._partial', $noParameters = [], $relativeRoute = true) }}'>
-            @include('_partials.placeholder-3-col')
+            @include('_partials.placeholder-n-col', ['amountCol' => 3])
         </include-fragment>
     </x-panel>
 </x-app-layout>
