@@ -57,39 +57,20 @@ class DelegateController extends Controller
     }
 
     /**
-     * Rendered transaction partial for one specific Delegate
+     * Rendered wallet partial for one specific Delegate, picking out `vote` attribute in view
      *
      * @return string
      */
-    public function _partialTransactions(string $delegateAddress)
+    public function _partialVote(string $delegateAddress)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallet()->transactions($delegateAddress);
+            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->show($delegateAddress);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
 
-        $transactions = $apiResponse['data'] ?? [];
+        $wallet = $apiResponse['data'] ?? [];
 
-        return view('_partials.transactions', compact('transactions'))->render();
-    }
-
-    /**
-     * Rendered votes partial for one specific Delegate
-     *
-     * @return string
-     */
-    public function _partialVotes(string $delegateAddress)
-    {
-        try {
-            // A vote is a special transaction, a delegate is a special wallet
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallet($delegateAddress);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $votes = $apiResponse['data'] ?? [];
-
-        return view('_partials.votes', compact('votes'))->render();
+        return view('_partials.vote', compact('wallet'))->render();
     }
 }

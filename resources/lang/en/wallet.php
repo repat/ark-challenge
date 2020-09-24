@@ -25,5 +25,6 @@ return [
         'secondPublicKey' => 'Second Public Key',
         'username' => 'Username',
         'vote' => 'Vote',
-    ]
+    ],
+    'no_vote' => 'This wallet does not vote for anybody.',
 ];

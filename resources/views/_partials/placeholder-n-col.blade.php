@@ -3,7 +3,7 @@
 
     <table class="bg-gray-100 w-full">
         <tbody>
-            @foreach(range(1, config('ark.limits.default')) as $row)
+            @foreach(range(1, $amountRows ?? config('ark.limits.default')) as $row)
                 <tr class="border-b">
                     @foreach(range(1, $amountCol) as $col)
                         <td class="p-4">

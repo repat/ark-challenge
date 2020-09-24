@@ -38,6 +38,5 @@ Route::prefix('delegate')->group(function () {
     Route::name('delegate')->get('/', 'DelegateController@index');
     Route::name('delegate.show')->get('/{delegate_address}/show', 'DelegateController@show');
     Route::name('delegate._partial')->get('/_partial', 'DelegateController@_partial');
-    Route::name('delegate._partial.transactions')->get('/_partial/{delegate_address}/transactions', 'DelegateController@_partialTransactions');
-    Route::name('delegate._partial.votes')->get('/_partial/{delegate_address}/votes', 'DelegateController@_partialVotes');
+    Route::name('delegate._partial.vote')->get('/_partial/{delegate_address}/vote', 'DelegateController@_partialVote');
 });

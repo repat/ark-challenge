@@ -75,4 +75,5 @@ return [
             'previous',
         ],
     ],
+    'cta' => 'ark:', // for href links
 ];

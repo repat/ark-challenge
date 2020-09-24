@@ -11,10 +11,10 @@ From the [Laravel Assignment Document](https://github.com/repat/ark-challenge/bl
 * ✅ List blocks and transactions from the ARK blockchain
 * ✅ Show detail pages for blocks and transactions
 * ✅ List wallets and corresponding transactions
-* ▫️ Showing delegates and who a wallet is voting for
+* ✅ Showing delegates and who a wallet is voting for
 * ✅ Switching between ARK Mainnet and ARK Devnet
 * ✅ User login and saving of user-preferences
-* ▫️ Letting a user save his own wallets
+* ✅ Letting a user save his own wallets
 
 See also [GitHub issues](https://github.com/repat/ark-challenge/issues/).
 

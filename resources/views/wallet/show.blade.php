@@ -31,7 +31,7 @@
             {{ $wallet['address'] }}
         </x-slot>
         <x-slot name="body">
-            {!! QrCode::size(100)->generate('ark:' . $wallet['address']) !!}
+            {!! QrCode::size(100)->generate(config('ark.cta') . $wallet['address']) !!}
         </x-slot>
     </x-modal>
     @endprepend

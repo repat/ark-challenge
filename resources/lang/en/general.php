@@ -27,6 +27,7 @@ return [
         'timestamp' => 'Timestamp',
         'transactions' => 'Transactions',
         'username' => 'User',
+        'votes_for' => 'Votes For',
         'yes' => 'Yes',
     ],
     'navigation' => [
