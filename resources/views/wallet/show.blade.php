@@ -4,7 +4,9 @@
             <i class="fas fa-qrcode" onclick="toggleModal()"></i>
             {{ __('wallet.headers.show', ['address' => $wallet['address']]) }}
 
+            @auth
             @livewire('user-favorite', ['address' => $wallet['address']])
+            @endauth
         </h2>
     </x-slot>
 

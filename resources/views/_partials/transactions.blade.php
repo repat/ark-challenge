@@ -25,10 +25,10 @@
                 </a>
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ $transaction['fee'] }} {!! ARK_CURRENCY !!}
+                {{ $transaction['amount'] }} {!! ARK_CURRENCY !!}
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ $transaction['amount'] }} {!! ARK_CURRENCY !!}
+                {{ $transaction['fee'] }} {!! ARK_CURRENCY !!}
             </td>
             <td class="border px-4 py-2">
                 {{ carbon($transaction['timestamp']['human'])->format(config('app.format_dates')) }}
