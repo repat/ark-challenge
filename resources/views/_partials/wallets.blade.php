@@ -25,7 +25,7 @@
                 </a>
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ $wallet['balance'] }} {!! ARK_CURRENCY !!}
+                {{ floatval($wallet['balance']) * ARKTOSHI2ARK_MULTIPLIER }} {!! ARK_CURRENCY !!}
             </td>
         </tr>
         @endforeach

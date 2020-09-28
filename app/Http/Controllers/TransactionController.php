@@ -23,7 +23,8 @@ class TransactionController extends Controller
             Log::error($e->getMessage());
         }
 
-        $transaction = $apiResponse['data'] ?? [];
+        // Replace Transaction type number by title from API's /transaction/types
+        $transaction = $this->replaceTransactionTypes($apiResponse['data'] ?? []);
 
         return view('transaction.show', compact('transaction'));
     }
@@ -45,5 +46,34 @@ class TransactionController extends Controller
         });
 
         return view('_partials.transactions', compact('transactions'))->render();
+    }
+
+    private function replaceTransactionTypes(array $transaction)
+    {
+        // This won't change much, remember it forever aka until next redployment
+        $types = Cache::rememberForever('transaction.types', function () {
+            try {
+                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->types() ?? [];
+            } catch (Exception $e) {
+                Log::error($e->getMessage());
+            }
+            /**
+             * 1 : // Group
+             *      - Transfer : 0
+             *      - SecondSignature : 1
+             *      - ...
+             * 2: // Group
+             *      - BusinessRegistration : 0
+             *      - BusinessResignation : 1
+             *      - ...
+             */
+            return $apiResponse['data'] ?? [];
+        });
+
+        $types = $types[$transaction['typeGroup']] ?? [];
+        $types = array_flip($types);
+        $transaction['type'] = $types[$transaction['type']] ?? trans('general.crud.unknown');
+
+        return $transaction;
     }
 }

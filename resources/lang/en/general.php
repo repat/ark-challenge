@@ -27,6 +27,7 @@ return [
         'show' => 'Show',
         'timestamp' => 'Timestamp',
         'transactions' => 'Transactions',
+        'unknown' => 'Unknown',
         'username' => 'User',
         'votes_for' => 'Votes For',
         'yes' => 'Yes',

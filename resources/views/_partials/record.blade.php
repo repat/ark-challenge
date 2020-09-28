@@ -21,11 +21,13 @@
                             <a href="{{ route('block.show', $values) }}">
                                 <i class="fas fa-cubes"></i> {{ $values }}
                             </a>
+                        @elseif(in_array($key, ['amount', 'fee']))
+                            {{ floatval($values) * ARKTOSHI2ARK_MULTIPLIER }} {!! ARK_CURRENCY !!}
                         @else
-                            @if($values === "0" || ! empty($values))
-                                {{ $values }}
-                            @else
+                            @if(starts_with($key, 'is') && empty($values))
                                 {{ __('general.crud.no') }}
+                            @else
+                                {{ $values }}
                             @endif
                         @endif
                     </div>
