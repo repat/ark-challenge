@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use ArkEcosystem\Ark\Facades\Ark;
-use Exception;
-use Illuminate\Support\Facades\Log;
-
 class WalletController extends Controller
 {
     /**
@@ -26,14 +22,10 @@ class WalletController extends Controller
      */
     public function show(string $walletAddress)
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->show($walletAddress);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
+        $wallet = $this->arkService->wallets()->show($walletAddress);
 
         // Filter out transactions as they are fetched below
-        $wallet = array_filter($apiResponse['data'] ?? [], fn ($key) => $key !== 'transactions');
+        $wallet = array_filter($wallet ?? [], fn ($key) => $key !== 'transactions');
 
         return view('wallet.show', compact('wallet'));
     }
@@ -45,13 +37,7 @@ class WalletController extends Controller
      */
     public function _partial()
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->all();
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $wallets = $apiResponse['data'] ?? [];
+        $wallets = $this->arkService->wallets()->all();
 
         return view('_partials.wallets', compact('wallets'))->render();
     }
@@ -63,13 +49,7 @@ class WalletController extends Controller
      */
     public function _partialTransactions(string $walletAddress)
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->transactions($walletAddress);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $transactions = $apiResponse['data'] ?? [];
+        $transactions = $this->arkService->wallets()->transactions($walletAddress);
 
         return view('_partials.transactions', compact('transactions'))->render();
     }

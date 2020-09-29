@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use ArkEcosystem\Ark\Facades\Ark;
-use Exception;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class BlockController extends Controller
 {
@@ -17,13 +14,7 @@ class BlockController extends Controller
      */
     public function show(string $blockId)
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->blocks()->show($blockId);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $block = $apiResponse['data'] ?? [];
+        $block = $this->arkService->blocks()->show($blockId);
 
         return view('block.show', compact('block'));
     }
@@ -36,12 +27,7 @@ class BlockController extends Controller
     public function _partial()
     {
         $blocks = Cache::remember('blocks', config('ark.blockchain_update_seconds'), function () {
-            try {
-                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
-            }
-            return $apiResponse['data'] ?? [];
+            return $this->arkService->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
         });
         return view('_partials.blocks', compact('blocks'))->render();
     }

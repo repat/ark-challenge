@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use ArkEcosystem\Ark\Facades\Ark;
 use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -18,7 +17,7 @@ class TransactionController extends Controller
     public function show(string $transactionId)
     {
         try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->show($transactionId);
+            return $this->arkService->transactions()->show($transactionId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
@@ -37,23 +36,25 @@ class TransactionController extends Controller
     public function _partial()
     {
         $transactions = Cache::remember('transactions', config('ark.blockchain_update_seconds'), function () {
-            try {
-                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->all(['limit' => config('ark.limits.transactions')]) ?? [];
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
-            }
-            return $apiResponse['data'] ?? [];
+            return $this->arkService->transactions()->all(['limit' => config('ark.limits.transactions')]);
         });
 
         return view('_partials.transactions', compact('transactions'))->render();
     }
 
-    private function replaceTransactionTypes(array $transaction)
+    /**
+     * Replaces transaction type based on groupId with english identifier returned by API
+     * Cached forever, will have to be flushed when a new one is added
+     *
+     * @param array $transaction
+     * @return array
+     */
+    private function replaceTransactionTypes(array $transaction) : array
     {
         // This won't change much, remember it forever aka until next redployment
         $types = Cache::rememberForever('transaction.types', function () {
             try {
-                $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->transactions()->types() ?? [];
+                return $this->arkService->transactions()->types() ?? [];
             } catch (Exception $e) {
                 Log::error($e->getMessage());
             }

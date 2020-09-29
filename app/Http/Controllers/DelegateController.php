@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use ArkEcosystem\Ark\Facades\Ark;
-use Exception;
-use Illuminate\Support\Facades\Log;
-
 class DelegateController extends Controller
 {
     /**
@@ -26,14 +22,10 @@ class DelegateController extends Controller
      */
     public function show(string $delegateAddress)
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->delegates()->show($delegateAddress);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
+        $delegate = $this->arkService->delegates()->show($delegateAddress);
 
         // Filter out transactions as they are fetched below
-        $delegate = array_filter($apiResponse['data'] ?? [], fn ($key) => $key !== 'transactions');
+        $delegate = array_filter($delegate, fn ($key) => $key !== 'transactions');
 
         return view('delegate.show', compact('delegate'));
     }
@@ -45,13 +37,7 @@ class DelegateController extends Controller
      */
     public function _partial()
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->delegates()->all();
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $delegates = $apiResponse['data'] ?? [];
+        $delegates = $this->arkService->delegates()->all();
 
         return view('_partials.delegates', compact('delegates'))->render();
     }
@@ -63,13 +49,7 @@ class DelegateController extends Controller
      */
     public function _partialVote(string $delegateAddress)
     {
-        try {
-            $apiResponse = Ark::connection(auth()->user()->net ?? config('ark.default'))->wallets()->show($delegateAddress);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
-
-        $wallet = $apiResponse['data'] ?? [];
+        $wallet = $this->arkService->wallets()->show($delegateAddress);
 
         return view('_partials.vote', compact('wallet'))->render();
     }
