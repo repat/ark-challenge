@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
@@ -16,11 +14,7 @@ class TransactionController extends Controller
      */
     public function show(string $transactionId)
     {
-        try {
-            $transaction = $this->arkService->transactions()->show($transactionId);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-        }
+        $transaction = $this->arkService->transactions()->show($transactionId);
 
         // Replace Transaction type number by title from API's /transaction/types directly in underlying `data` array
         $transaction->setDataArray($this->replaceTransactionTypes($transaction->getDataArray()));
@@ -53,21 +47,17 @@ class TransactionController extends Controller
     {
         // This won't change much, remember it forever aka until next redployment
         $types = Cache::rememberForever('transaction.types', function () {
-            try {
-                /**
-                 * 1 : // Group
-                 *      - Transfer : 0
-                 *      - SecondSignature : 1
-                 *      - ...
-                 * 2: // Group
-                 *      - BusinessRegistration : 0
-                 *      - BusinessResignation : 1
-                 *      - ...
-                 */
-                return $this->arkService->reset()->transactions()->types()->getDataArray();
-            } catch (Exception $e) {
-                Log::error($e->getMessage());
-            }
+            /**
+             * 1 : // Group
+             *      - Transfer : 0
+             *      - SecondSignature : 1
+             *      - ...
+             * 2: // Group
+             *      - BusinessRegistration : 0
+             *      - BusinessResignation : 1
+             *      - ...
+             */
+            return $this->arkService->reset()->transactions()->types()->getDataArray();
         });
 
         $types = $types[$transaction['typeGroup']] ?? [];
