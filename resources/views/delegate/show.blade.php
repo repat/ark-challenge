@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('delegate.headers.show', ['address' => $delegate['address']]) }}
+            {{ __('delegate.headers.show', ['address' => $delegate->address]) }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
             </h2>
         </x-slot>
 
-        <include-fragment src='{{ route('delegate._partial.vote', $delegate['address'], $relativeRoute = true) }}'>
+        <include-fragment src='{{ route('delegate._partial.vote', $delegate->address, $relativeRoute = true) }}'>
             @include('_partials.placeholder-n-col', ['amountCol' => 2, 'amountRows' => 1])
         </include-fragment>
     </x-panel>

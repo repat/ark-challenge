@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\ArkModel;
 use ArkEcosystem\Ark\Facades\Ark;
 use ArkEcosystem\Client\Connection;
 use Exception;
@@ -17,7 +18,7 @@ class ArkService
     protected $connection;
 
     /**
-     * Constructor sets the connection based on user preference and Logs any error
+     * Constructor sets the connection based on user preference and logs any error
      */
     public function __construct()
     {
@@ -26,7 +27,7 @@ class ArkService
 
     /**
      * Magic method for any API call, pulling out `data` key if return is API response
-     * Logging Errors if API call fails
+     * Logging errors if API call fails
      *
      * @param string $name
      * @param array $arguments
@@ -44,11 +45,16 @@ class ArkService
 
         // We're at the end of the chain, this is the API response because it's an array
         if (is_array($return)) {
-            // Just pick out the data
-            return $return['data'] ?? [];
+            // In case there are multiple entries the API response would have a meta key for next pages etc
+            if (array_key_exists('meta', $return) || count($return) > 1) {
+                // collection of ArkModels
+                return collect($return['data'] ?? [])->map(fn ($record) => new ArkModel($record));
+            }
+            // Or just pick out the data for a single record, e.g. show(transactionId)
+            return new ArkModel($return['data'] ?? []);
         }
 
-        // This is a chained call, set the returned Api\[Transaction|Wallet] etc as connection to run other methods on
+        // This is a chained call, set the returned API\[Transaction|Wallet...] etc as connection to run other methods on
         $this->connection = $return;
         return $this;
     }
@@ -61,7 +67,9 @@ class ArkService
         try {
             $this->connection = Ark::connection(auth()->user()->net ?? config('ark.default'));
         } catch (Exception $e) {
+            // Just catch any exception and log it for now
             Log::error($e->getMessage());
         }
+        return $this;
     }
 }

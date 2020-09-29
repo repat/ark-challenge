@@ -15,15 +15,15 @@
         @foreach($delegates as $delegate)
         <tr>
             <td class="border px-4 py-2 text-center">
-                {{ $delegate['rank'] }}
+                {{ $delegate->rank }}
             </td>
             <td class="border px-4 py-2">
-                <a href="{{ route('delegate.show', $delegate['address']) }}" title="{{ __('delegate.show', ['address' => $delegate['address']]) }}">
-                    <i class="fas fa-wallet"></i> {{ str_limit($delegate['address'], config('ark.long_id_length')) }}
+                <a href="{{ route('delegate.show', $delegate->address) }}" title="{{ __('delegate.show', ['address' => $delegate->address]) }}">
+                    <i class="fas fa-wallet"></i> {{ str_limit($delegate->address, config('ark.long_id_length')) }}
                 </a>
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ $delegate['username'] }}
+                {{ $delegate->username }}
             </td>
         </tr>
         @endforeach

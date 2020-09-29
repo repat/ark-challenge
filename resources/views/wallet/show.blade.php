@@ -2,10 +2,10 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <i class="fas fa-qrcode" onclick="toggleModal()"></i>
-            {{ __('wallet.headers.show', ['address' => $wallet['address']]) }}
+            {{ __('wallet.headers.show', ['address' => $wallet->address]) }}
 
             @auth
-            @livewire('user-favorite', ['address' => $wallet['address']])
+                @livewire('user-favorite', ['address' => $wallet->address])
             @endauth
         </h2>
     </x-slot>
@@ -19,7 +19,7 @@
                 <x-slot name="header">
                     <h2>{{ __('transaction.header') }}</h2>
                 </x-slot>
-                <include-fragment src='{{ route('wallet._partial.transactions', $wallet['address'], $relativeRoute = true) }}'>
+                <include-fragment src='{{ route('wallet._partial.transactions', $wallet->address, $relativeRoute = true) }}'>
                     @include('_partials.placeholder-n-col', ['amountCol' => 4])
                 </include-fragment>
             </x-panel>
@@ -30,10 +30,10 @@
     @prepend('modals')
     <x-modal>
         <x-slot name="title">
-            {{ $wallet['address'] }}
+            {{ $wallet->address }}
         </x-slot>
         <x-slot name="body">
-            {!! QrCode::size(100)->generate(config('ark.cta') . $wallet['address']) !!}
+            {!! QrCode::size(100)->generate(config('ark.cta') . $wallet->address) !!}
         </x-slot>
     </x-modal>
     @endprepend

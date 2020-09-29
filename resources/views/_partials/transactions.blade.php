@@ -20,18 +20,18 @@
     @foreach($transactions as $transaction)
         <tr>
             <td class="border px-4 py-2">
-                <a href="{{ route('transaction.show', $transaction['id']) }}" title="{{ __('transaction.show', ['id' => $transaction['id']]) }}">
-                    <i class="fas fa-file-invoice-dollar"></i> {{ str_limit($transaction['id'], config('ark.long_id_length')) }}
+                <a href="{{ route('transaction.show', $transaction->id) }}" title="{{ __('transaction.show', ['id' => $transaction->id]) }}">
+                    <i class="fas fa-file-invoice-dollar"></i> {{ str_limit($transaction->id, config('ark.long_id_length')) }}
                 </a>
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ floatval($transaction['amount']) * ARKTOSHI2ARK_MULTIPLIER }} {!! ARK_CURRENCY !!}
+               {!! $transaction->formatCurrency('amount') !!}
             </td>
             <td class="border px-4 py-2 text-right">
-                {{ floatval($transaction['fee']) * ARKTOSHI2ARK_MULTIPLIER }} {!! ARK_CURRENCY !!}
+                {!! $transaction->formatCurrency('fee') !!}
             </td>
             <td class="border px-4 py-2">
-                {{ carbon($transaction['timestamp']['human'])->format(config('app.format_dates')) }}
+                {{ $transaction->formatDate('timestamp.human') }}
             </td>
         </tr>
     @endforeach

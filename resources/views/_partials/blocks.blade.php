@@ -19,20 +19,20 @@
     @foreach($blocks as $block)
         <tr>
             <td class="border px-4 py-2">
-                <a href="{{ route('block.show', $block['id']) }}" title="{{ __('block.show', ['id' => $block['id']]) }}">
-                    <i class="fas fa-cubes"></i> {{ str_limit($block['id'], config('ark.long_id_length')) }}
+                <a href="{{ route('block.show', $block->id) }}" title="{{ __('block.show', ['id' => $block->id]) }}">
+                    <i class="fas fa-cubes"></i> {{ str_limit($block->id, config('ark.long_id_length')) }}
                 </a>
             </td>
             <td class="border px-4 py-2">
-                {{ $block['transactions'] }}
+                {{ $block->transactions }}
             </td>
             <td class="border px-4 py-2">
-                <a href="{{ route('wallet.show', array_get($block, 'generator.address')) }}" title="{{ __('wallet.show', ['address' => array_get($block, 'generator.address')]) }}">
-                    {{ array_get($block, 'generator.username') }}
+                <a href="{{ route('wallet.show', $block->{'generator.address'}) }}" title="{{ __('wallet.show', ['address' => $block->{'generator.address'}]) }}">
+                    {{ $block->generator['username'] }}
                 </a>
             </td>
             <td class="border px-4 py-2">
-                {{ carbon($block['timestamp']['human'])->format(config('app.format_dates')) }}
+                {{ $block->formatDate('timestamp.human') }}
             </td>
         </tr>
     @endforeach

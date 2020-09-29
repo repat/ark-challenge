@@ -17,13 +17,13 @@ class TransactionController extends Controller
     public function show(string $transactionId)
     {
         try {
-            return $this->arkService->transactions()->show($transactionId);
+            $transaction = $this->arkService->transactions()->show($transactionId);
         } catch (Exception $e) {
             Log::error($e->getMessage());
         }
 
-        // Replace Transaction type number by title from API's /transaction/types
-        $transaction = $this->replaceTransactionTypes($apiResponse['data'] ?? []);
+        // Replace Transaction type number by title from API's /transaction/types directly in underlying `data` array
+        $transaction->setDataArray($this->replaceTransactionTypes($transaction->getDataArray()));
 
         return view('transaction.show', compact('transaction'));
     }
@@ -54,25 +54,24 @@ class TransactionController extends Controller
         // This won't change much, remember it forever aka until next redployment
         $types = Cache::rememberForever('transaction.types', function () {
             try {
-                return $this->arkService->transactions()->types() ?? [];
+                /**
+                 * 1 : // Group
+                 *      - Transfer : 0
+                 *      - SecondSignature : 1
+                 *      - ...
+                 * 2: // Group
+                 *      - BusinessRegistration : 0
+                 *      - BusinessResignation : 1
+                 *      - ...
+                 */
+                return $this->arkService->reset()->transactions()->types()->getDataArray();
             } catch (Exception $e) {
                 Log::error($e->getMessage());
             }
-            /**
-             * 1 : // Group
-             *      - Transfer : 0
-             *      - SecondSignature : 1
-             *      - ...
-             * 2: // Group
-             *      - BusinessRegistration : 0
-             *      - BusinessResignation : 1
-             *      - ...
-             */
-            return $apiResponse['data'] ?? [];
         });
 
         $types = $types[$transaction['typeGroup']] ?? [];
-        $types = array_flip($types);
+        $types = array_flip($types); // not array anymore but ArkModel
         $transaction['type'] = $types[$transaction['type']] ?? trans('general.crud.unknown');
 
         return $transaction;

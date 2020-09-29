@@ -24,9 +24,6 @@ class WalletController extends Controller
     {
         $wallet = $this->arkService->wallets()->show($walletAddress);
 
-        // Filter out transactions as they are fetched below
-        $wallet = array_filter($wallet ?? [], fn ($key) => $key !== 'transactions');
-
         return view('wallet.show', compact('wallet'));
     }
 

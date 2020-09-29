@@ -24,9 +24,6 @@ class DelegateController extends Controller
     {
         $delegate = $this->arkService->delegates()->show($delegateAddress);
 
-        // Filter out transactions as they are fetched below
-        $delegate = array_filter($delegate, fn ($key) => $key !== 'transactions');
-
         return view('delegate.show', compact('delegate'));
     }
 

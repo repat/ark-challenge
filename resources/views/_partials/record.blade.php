@@ -1,13 +1,13 @@
 <x-panel>
     <div class="flex flex-col">
-        @if(array_key_exists('timestamp', $record) && array_key_exists('human', $record['timestamp']))
+        @if(isset($record->{'timestamp.human'}))
         <small class="text-right pr-2 pt-2">
-            {{ carbon($record['timestamp']['human'])->format(config('app.format_dates')) }}
+            {{ $record->formatDate('timestamp.human') }}
         </small>
         @endif
         <h2 class="text-center pb-4 pt-2">{{ __('general.crud.details') }}</h2>
 
-        @foreach(array_filter($record, fn($r) => !is_array($r)) as $key => $values)
+        @foreach(array_filter($record->getDataArray(), fn($r) => !is_array($r)) as $key => $values)
                 <div class="flex mb4">
                     <div class="w-1/4 bg-gray-100 h-12 p-10">
                         {{ __($transKey . '.fields.' . $key) }}
@@ -26,6 +26,8 @@
                         @else
                             @if(starts_with($key, 'is') && empty($values))
                                 {{ __('general.crud.no') }}
+                            @elseif(starts_with($key, 'is') && $values == 1)
+                                {{ __('general.crud.yes') }}
                             @else
                                 {{ $values }}
                             @endif
