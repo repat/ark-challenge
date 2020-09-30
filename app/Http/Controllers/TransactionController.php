@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ArkService;
+use App\Models\ArkModel;
+
+;
 use Illuminate\Support\Facades\Cache;
 
 class TransactionController extends Controller
@@ -14,10 +18,12 @@ class TransactionController extends Controller
      */
     public function show(string $transactionId)
     {
-        $transaction = $this->arkService->transactions()->show($transactionId);
+        $transaction = ArkService::transactions()->show($transactionId);
 
-        // Replace Transaction type number by title from API's /transaction/types directly in underlying `data` array
-        $transaction->setDataArray($this->replaceTransactionTypes($transaction->getDataArray()));
+        if (is_a($transaction, ArkModel::class)) {
+            // Replace Transaction type number by title from API's /transaction/types directly in underlying `data` array
+            $transaction->setDataArray($this->replaceTransactionTypes($transaction->getDataArray()));
+        }
 
         return view('transaction.show', compact('transaction'));
     }
@@ -30,7 +36,7 @@ class TransactionController extends Controller
     public function _partial()
     {
         $transactions = Cache::remember('transactions', config('ark.blockchain_update_seconds'), function () {
-            return $this->arkService->transactions()->all(['limit' => config('ark.limits.transactions')]);
+            return ArkService::transactions()->all(['limit' => config('ark.limits.transactions')]);
         });
 
         return view('_partials.transactions', compact('transactions'))->render();
@@ -57,7 +63,7 @@ class TransactionController extends Controller
              *      - BusinessResignation : 1
              *      - ...
              */
-            return $this->arkService->reset()->transactions()->types()->getDataArray();
+            return ArkService::reset()->transactions()->types()->getDataArray();
         });
 
         $types = $types[$transaction['typeGroup']] ?? [];

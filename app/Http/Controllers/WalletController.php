@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ArkService;
+
 class WalletController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class WalletController extends Controller
      */
     public function show(string $walletAddress)
     {
-        $wallet = $this->arkService->wallets()->show($walletAddress);
+        $wallet = ArkService::wallets()->show($walletAddress);
 
         return view('wallet.show', compact('wallet'));
     }
@@ -34,7 +36,7 @@ class WalletController extends Controller
      */
     public function _partial()
     {
-        $wallets = $this->arkService->wallets()->all();
+        $wallets = ArkService::wallets()->all();
 
         return view('_partials.wallets', compact('wallets'))->render();
     }
@@ -46,7 +48,7 @@ class WalletController extends Controller
      */
     public function _partialTransactions(string $walletAddress)
     {
-        $transactions = $this->arkService->wallets()->transactions($walletAddress);
+        $transactions = ArkService::wallets()->transactions($walletAddress);
 
         return view('_partials.transactions', compact('transactions'))->render();
     }

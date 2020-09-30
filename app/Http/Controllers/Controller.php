@@ -11,16 +11,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    /**
-     * Service class for Ark API connection
-     *
-     * `protected` so extended Controllers can access it
-     */
-    protected ?ArkService $arkService;
-
-    public function __construct(ArkService $arkService)
-    {
-        $this->arkService = $arkService;
-    }
 }

@@ -35,6 +35,11 @@ class ArkService
      */
     public function __call(string $name, array $arguments)
     {
+        if (in_array($name, ['getDataArray', 'setDataArray'])) {
+            // early return, this call is not meant for the Service but for the ArkModel
+            return;
+        }
+
         try {
             // Call methods on connection dynamically
             $return = [$this->connection, $name](...$arguments);

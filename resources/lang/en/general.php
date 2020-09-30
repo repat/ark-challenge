@@ -17,6 +17,7 @@ return [
         'close' => 'Close',
         'delegate' => 'Delegate',
         'details' => 'Details',
+        'err' => 'Error',
         'fee' => 'Fee',
         'generator' => 'Generator',
         'id' => 'ID',

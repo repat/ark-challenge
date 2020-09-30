@@ -7,6 +7,7 @@
         @endif
         <h2 class="text-center pb-4 pt-2">{{ __('general.crud.details') }}</h2>
 
+        @if(is_a($record, \App\Models\ArkModel::class))
         @foreach(array_filter($record->getDataArray(), fn($r) => !is_array($r)) as $key => $values)
                 <div class="flex mb4">
                     <div class="w-1/4 bg-gray-100 h-12 p-10">
@@ -35,5 +36,6 @@
                     </div>
                 </div>
         @endforeach
+        @endif
     </div>
 </x-panel>

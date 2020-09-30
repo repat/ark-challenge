@@ -37,7 +37,7 @@ class ArkModel
      */
     public function formatCurrency(string $currency) : string
     {
-        return floatval(array_get($this->data, $currency)) * ARKTOSHI2ARK_MULTIPLIER  . ' ' . ARK_CURRENCY;
+        return floatval(array_get($this->data, $currency)) * ARKTOSHI2ARK_MULTIPLIER . ' ' . ARK_CURRENCY;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ArkService;
 use Illuminate\Support\Facades\Cache;
 
 class BlockController extends Controller
@@ -14,7 +15,7 @@ class BlockController extends Controller
      */
     public function show(string $blockId)
     {
-        $block = $this->arkService->blocks()->show($blockId);
+        $block = ArkService::blocks()->show($blockId);
 
         return view('block.show', compact('block'));
     }
@@ -27,7 +28,7 @@ class BlockController extends Controller
     public function _partial()
     {
         $blocks = Cache::remember('blocks', config('ark.blockchain_update_seconds'), function () {
-            return $this->arkService->blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
+            return ArkService::blocks()->all(['limit' => config('ark.limits.blocks')]) ?? [];
         });
         return view('_partials.blocks', compact('blocks'))->render();
     }

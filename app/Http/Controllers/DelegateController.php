@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\ArkService;
+
 class DelegateController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class DelegateController extends Controller
      */
     public function show(string $delegateAddress)
     {
-        $delegate = $this->arkService->delegates()->show($delegateAddress);
+        $delegate = ArkService::delegates()->show($delegateAddress);
 
         return view('delegate.show', compact('delegate'));
     }
@@ -34,7 +36,7 @@ class DelegateController extends Controller
      */
     public function _partial()
     {
-        $delegates = $this->arkService->delegates()->all();
+        $delegates = ArkService::delegates()->all();
 
         return view('_partials.delegates', compact('delegates'))->render();
     }
@@ -46,7 +48,7 @@ class DelegateController extends Controller
      */
     public function _partialVote(string $delegateAddress)
     {
-        $wallet = $this->arkService->wallets()->show($delegateAddress);
+        $wallet = ArkService::wallets()->show($delegateAddress);
 
         return view('_partials.vote', compact('wallet'))->render();
     }
